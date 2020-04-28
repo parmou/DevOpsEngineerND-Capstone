@@ -9,7 +9,8 @@ pipeline{
     stages{
         stage('Lint HTML') {
              steps {
-                 sh 'tidy -q -e *.html'
+                 sh 'ls -ltr'
+                 sh 'tidy -q -e ./web-resume/*.html'
              }
         }
 
