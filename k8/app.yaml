@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: web-resume-example
+  name: web-resume
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: web-resume-example
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: web-resume-example
+    spec:
+      containers:
+      - image: docker.io/parveshmourya/capstone
+        name: web-resume
+        ports:
+        - containerPort: 8080
