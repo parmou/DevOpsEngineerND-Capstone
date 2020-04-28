@@ -1,0 +1,22 @@
+{
+   "kind":"Service",
+   "apiVersion":"v1",
+   "metadata":{
+      "name":"web-resume",
+      "labels":{
+         "app":"web-resume"
+      }
+   },
+   "spec":{
+      "ports": [
+         {
+           "port":8080,
+           "targetPort":8080
+         }
+      ],
+      "selector":{
+         "app":"web-resume"
+      },
+      "type": "LoadBalancer"
+   }
+}
