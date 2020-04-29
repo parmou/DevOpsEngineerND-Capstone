@@ -33,7 +33,10 @@ pipeline{
 
         stage('Set eksctl contet'){
             steps{
-            sh 'aws eks --region ap-south-1 update-kubeconfig --name web-resume-prod'
+                 withAWS(region: 'us-east-2', credentials: 'aws-static'){
+                      sh 'aws eks --region ap-south-1 update-kubeconfig --name web-resume-prod'
+                 }
+           
         }
 
         }
