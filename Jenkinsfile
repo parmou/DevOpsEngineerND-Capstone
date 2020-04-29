@@ -1,7 +1,7 @@
 pipeline{
 
     environment{
-        registry="parveshmourya/web-resume"
+        registry="parveshmourya/web-resume:v3"
         DOCKERHUB_CREDS = credentials('dockerhub')
 
     }
@@ -19,7 +19,7 @@ pipeline{
 
         stage('Build Image from Dockerfile'){
             steps{
-                sh 'docker build --tag=parveshmourya/capstone .'
+                sh 'docker build --tag=$registry .'
                 sh 'docker images ls'
             }
         }
@@ -27,7 +27,7 @@ pipeline{
         stage('Upload Image'){
             steps{
                 sh 'docker login -u $DOCKERHUB_CREDS_USR -p $DOCKERHUB_CREDS_PSW'
-                sh 'docker push parveshmourya/capstone'
+                sh 'docker push $registry'
             }
         }
 
@@ -50,6 +50,9 @@ pipeline{
                 sh 'kubectl expose deployment web-resume --type=LoadBalancer --name=webapp'
                 sh 'kubectl get pods'
                 sh 'kubectl get svc'
+                sh 'kubectl set image deployments/web-resume web-resume=$registry'
+                sh 'sleep 5'
+                sh 'kubectl rollout status deployments/web-resume'
             }
         }
         }

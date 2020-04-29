@@ -9,7 +9,7 @@ import (
 
 func main() {
     http.HandleFunc("/", func (w http.ResponseWriter, r *http.Request) {
-        fmt.Fprintf(w, "Testing EKS and Jenkins!")
+        fmt.Fprintf(w, "Testing Rolling Deployment in K8")
     })
 
     fs := http.FileServer(http.Dir("static/"))
