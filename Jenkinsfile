@@ -19,7 +19,7 @@ pipeline{
 
         stage('Build Image from Dockerfile'){
             steps{
-                sh 'docker build --tag=parveshmourya/web-resume .'
+                sh 'docker build --tag=parveshmourya/capstone .'
                 sh 'docker images ls'
             }
         }
@@ -27,7 +27,7 @@ pipeline{
         stage('Upload Image'){
             steps{
                 sh 'docker login -u $DOCKERHUB_CREDS_USR -p $DOCKERHUB_CREDS_PSW'
-                sh 'docker push parveshmourya/web-resume'
+                sh 'docker push parveshmourya/capstone'
             }
         }
 
