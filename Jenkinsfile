@@ -34,7 +34,7 @@ pipeline{
         stage('Set eksctl contet'){
             steps{
                  withAWS(region: 'us-east-2', credentials: 'aws-static'){
-                      sh 'aws eks --region ap-south-1 update-kubeconfig --name web-resume-prod'
+                      sh '/home/ubuntu/.local/bin/aws eks --region ap-south-1 update-kubeconfig --name web-resume-prod'
                  }
            
         }
@@ -45,11 +45,11 @@ pipeline{
             steps{
             withAWS(region: 'us-east-2', credentials: 'aws-static'){
                 sh 'echo Starting with setup on AWS EKS'
-                sh 'kubectl apply -f k8/app.yaml'
-                sh 'kubectl get nodes'
-                sh 'kubectl expose deployment web-resume --type=LoadBalancer --name=webapp'
-                sh 'kubectl get pods'
-                sh 'kubectl get svc'
+                sh '/home/ubuntu/bin/kubectl apply -f k8/app.yaml'
+                sh '/home/ubuntu/bin/kubectl get nodes'
+                sh '/home/ubuntu/bin/kubectl expose deployment web-resume --type=LoadBalancer --name=webapp'
+                sh '/home/ubuntu/bin/kubectl get pods'
+                sh '/home/ubuntu/bin/kubectl get svc'
             }
         }
         }
