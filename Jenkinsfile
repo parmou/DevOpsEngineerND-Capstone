@@ -11,7 +11,7 @@ pipeline{
              steps {
                  sh 'ls -ltr'
                  sh 'echo Linting Dockerfile'
-                 sh '/home/ubuntu/.local/bin/hadolint Dockerfile'
+                 sh 'docker run --rm -i hadolint/hadolint < Dockerfile'
              }
         }
 
@@ -31,13 +31,15 @@ pipeline{
             }
         }
 
-        stage('Set eksctl contet')
-        steps{
+        stage('Set eksctl contet'){
+            steps{
             sh 'aws eks --region ap-south-1 update-kubeconfig --name web-resume-prod'
         }
 
-        stage('Deploy to AWS')
-        steps{
+        }
+        
+        stage('Deploy to AWS'){
+            steps{
             withAWS(region: 'us-east-2', credentials: 'aws-static'){
                 sh 'echo Starting with setup on AWS EKS'
                 sh 'kubectl apply -f k8/app.yaml'
@@ -47,5 +49,7 @@ pipeline{
                 sh 'kubectl get svc'
             }
         }
+        }
+        
     }
 }
