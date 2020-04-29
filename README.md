@@ -4,9 +4,13 @@ The final project demostrates the concept of CI/CD
 
 1. A Jenkins server on the AWS EC2 which uses pipeline from the github to fetch the code, check linting   and then build the image and upload it to the Dockerhub 
 2. In second part we use K8s functionality to deploy the image to the nodes
+3. The EKS cluster is created using the eksclt utility command for which is mentioned below
 
-The EKS cluster is created using the eksclt utility command for which is mentioned below
+## Link to the project
 
+```
+https://github.com/parveshmourya/devopsnd-capstone.git
+```
 
 ### Command to create the eks cluster
 
